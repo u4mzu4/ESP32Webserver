@@ -108,31 +108,31 @@ String processor(const String& var)
   return String();
 }
 
-void SetUpWebServer ()
+void SetupWebServer ()
 {
   server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
     int paramsNr = request->params();
-    if (paramsNr == 4)
+    if (4 == paramsNr)
     {
       for (int j = 0; j < paramsNr; j++)
       {
         AsyncWebParameter* p = request->getParam(j);
-        if (p->name() == "p1")
+        if (String("p1") == p->name())
         {
           setValue = p->value().toFloat();
           //Blynk.virtualWrite(V5, setValue);
         }
-        if (p->name() == "p2")
+        if (String("p2") == p->name())
         {
           heatingON = (bool)(p->value().toInt());
           //Blynk.virtualWrite(V2, heatingON);
         }
-        if (p->name() == "p3")
+        if (String("p3") == p->name())
         {
           setFloorTemp  = p->value().toFloat();
           //Blynk.virtualWrite(V6, setFloorTemp);
         }
-        if (p->name() == "p4")
+        if (String("p4") == p->name())
         {
           setControlBase  = p->value().toInt();
           //Blynk.virtualWrite(V12, setControlBase);
@@ -169,7 +169,7 @@ void setup() {
     delay(500);
   }
   // Setup Webserver
-  SetUpWebServer();
+  SetupWebServer();
 }
 
 void loop() {
