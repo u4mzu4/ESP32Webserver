@@ -110,6 +110,7 @@ String processor(const String& var)
 
 void SetupWebServer ()
 {
+  SPIFFS.begin(true);
   server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
     int paramsNr = request->params();
     if (4 == paramsNr)
@@ -160,10 +161,7 @@ void SetupWebServer ()
 
 
 void setup() {
-  // Initialize SPIFFS
-  SPIFFS.begin(true);
-
-  // Connect to Wi-Fi
+   // Connect to Wi-Fi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
